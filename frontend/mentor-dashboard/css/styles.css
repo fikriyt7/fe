@@ -1,0 +1,47 @@
+.sidebar {
+    padding-top: 2rem;
+    height: 500px;
+    border-radius: 10px;
+    width: 300px;
+   
+    
+}
+
+
+.sidebar ul.nav {
+    flex-direction: column;
+}
+
+.sidebar ul.nav .nav-link {
+    color: #333;
+}
+
+.sidebar ul.nav .nav-link.active {
+    font-weight: bold;
+    color: #007bff;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 0;
+    z-index: 999;
+}
+
+/* Styles for the navbar links */
+.nav-link {
+    position: relative;
+}
+
+/* Animation for dropdown icon */
+.dropdown-icon.rotate-down {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+}
+
+/* Styles for navbar hover effect */
+.nav-link:hover .dropdown-menu {
+    display: block;
+}

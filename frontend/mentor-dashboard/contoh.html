@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Mentor</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- FullCalendar -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.11/index.global.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <!-- Header Content -->
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-5 flex flex-col lg:flex-row">
+        <!-- Sidebar -->
+        <div class="bg-white p-4 ml-10 shadow-lg lg:w-1/4 sidebar lg:mr-5 rounded-lg border-2 border-gray">
+            <!-- Sidebar Content -->
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex- lg:flex lg:flex-row">
+            <!-- Left Content -->
+            <div class="lg:flex-5">
+                <!-- Main Content Area -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" style="grid-auto-rows: minmax(80px, auto)">
+                    <!-- Course Cards -->
+                    <div id="courseContainer">
+                        <!-- Data Kursus akan ditampilkan di sini -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="lg:w-1/4 lg:ml-5 bg-white p-4 shadow-lg rounded-lg space-y-6 border-2 border-grey">
+                <!-- Profile Section -->
+                <div class="p-4 bg-gray-100 rounded-lg shadow-md text-center">
+                    <!-- Profile Content -->
+                </div>
+
+                <!-- Calendar Section -->
+                <div class="p-4 bg-gray-100 rounded-lg shadow-md">
+                    <!-- Calendar Content -->
+                </div>
+
+                <!-- Notes Section -->
+                <div class="p-4 bg-gray-100 rounded-lg shadow-md">
+                    <!-- Notes Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop Up Form Edit Profile -->
+    <div id="editProfileModal" class="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center hidden">
+        <!-- Edit Profile Form -->
+    </div>
+
+    <!-- Add Note Modal -->
+    <div id="addNoteModal" class="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center hidden">
+        <!-- Add Note Form -->
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.11/index.global.min.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Panggil fungsi untuk mengambil data kursus dari backend
+            fetchCourses();
+        });
+
+        function fetchCourses() {
+            // Ganti URL ini dengan URL endpoint dari backend Anda
+            const url = 'http://0.tcp.ap.ngrok.io:12485/course';
+
+            // Lakukan request ke backend
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Panggil fungsi untuk menampilkan data kursus
+                    displayCourses(data);
+                })
+                .catch(error => console.error('Error fetching courses:', error));
+        }
+
+        function displayCourses(courses) {
+            const courseContainer = document.getElementById('courseContainer');
+
+            // Kosongkan konten sebelum menambahkan kursus baru
+            courseContainer.innerHTML = '';
+
+            // Loop melalui data kursus dan buat elemen HTML untuk setiap kursus
+            courses.forEach(course => {
+                const courseCard = `
+                    <div class="bg-white p-5 rounded-lg shadow-md flex">
+                        <img src="${course.image}" alt="Course Image" class="h-32 w-32 object-cover rounded-lg mr-4">
+                        <div class="flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-bold text-xl">${course.title}</h3>
+                                <div class="flex items-center text-gray-500">
+                                    <i class="fas fa-tag text-gray-400 mr-1"></i>
+                                    <span>${course.category}</span>
+                                    <span class="ml-2">${course.rating}</span>
+                                </div>
+                                <div class="flex items-center text-gray-500">
+                                    <i class="fas fa-book-open text-gray-400 mr-1"></i>
+                                    <span>${course.modules} Modul</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center mt-4">
+                                <div class="flex items-center text-yellow-400 mr-2">
+                                    <i class="fas fa-star mr-1"></i>
+                                    <span>${course.rating}</span>
+                                </div>
+                                <span class="text-gray-500">(${course.reviews} Reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                courseContainer.innerHTML += courseCard;
+            });
+        }
+    </script>
+</body>
+
+</html>

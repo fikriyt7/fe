@@ -1,0 +1,104 @@
+.sidebar {
+    padding-top: 2rem;
+    height: 500px;
+    border-radius: 10px;
+    width: 279px;
+   
+    
+}
+
+
+.sidebar ul.nav {
+    flex-direction: column;
+}
+
+.sidebar ul.nav .nav-link {
+    color: #333;
+}
+
+.sidebar ul.nav .nav-link.active {
+    font-weight: bold;
+    color: #007bff;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 0;
+    z-index: 999;
+}
+
+/* Styles for the navbar links */
+.nav-link {
+    position: relative;
+}
+
+/* Animation for dropdown icon */
+.dropdown-icon.rotate-down {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+}
+
+/* Styles for navbar hover effect */
+.nav-link:hover .dropdown-menu {
+    display: block;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-file-input::before {
+    content: 'Pilih Gambar';
+    display: inline-block;
+    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+}
+.custom-file-input:hover::before {
+    border-color: black;
+}
+.custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
